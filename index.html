@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>December 2024 Calendar</title>
+  <style>
+    /* General Layout */
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f4f4f4;
+      margin: 0;
+    }
+
+    .container {
+      display: flex;
+      background-color: #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Calendar Section */
+    .calendar {
+      background-color: #ffffff;
+      padding: 20px;
+      width: 350px;
+    }
+
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+    }
+
+    .day-header, .day {
+      padding: 10px;
+      text-align: center;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .day-header {
+      font-weight: bold;
+      color: #555;
+    }
+
+    .day {
+      background-color: #f5f5f5;
+      position: relative;
+      transition: background-color 0.2s;
+    }
+
+    .day:hover {
+      background-color: #d8d8ff;
+    }
+
+    .day.selected {
+      background-color: #b5b5f5;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    /* Sidebar Section */
+    .event-sidebar {
+      width: 300px;
+      background-color: #2e3a59;
+      color: #fff;
+      padding: 20px;
+    }
+
+    .event-header {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .event-list {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .event {
+      margin-bottom: 10px;
+    }
+
+    .no-events {
+      font-size: 14px;
+      font-style: italic;
+      color: #a9a9a9;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Calendar Section -->
+  <div class="calendar">
+    <div class="calendar-header">
+      <span>December 2024</span>
+    </div>
+    <div class="calendar-grid">
+      <!-- Day Headers -->
+      <div class="day-header">Sun</div>
+      <div class="day-header">Mon</div>
+      <div class="day-header">Tue</div>
+      <div class="day-header">Wed</div>
+      <div class="day-header">Thu</div>
+      <div class="day-header">Fri</div>
+      <div class="day-header">Sat</div>
+
+      <!-- Days of December 2024 -->
+      <div class="day" onclick="showEvents(1)">1</div>
+      <div class="day" onclick="showEvents(2)">2</div>
+      <div class="day" onclick="showEvents(3)">3</div>
+      <div class="day" onclick="showEvents(4)">4</div>
+      <div class="day" onclick="showEvents(5)">5</div>
+      <div class="day" onclick="showEvents(6)">6</div>
+      <div class="day" onclick="showEvents(7)">7</div>
+      <div class="day" onclick="showEvents(8)">8</div>
+      <div class="day" onclick="showEvents(9)">9</div>
+      <div class="day" onclick="showEvents(10)">10</div>
+      <div class="day" onclick="showEvents(11)">11</div>
+      <div class="day" onclick="showEvents(12)">12</div>
+      <div class="day" onclick="showEvents(13)">13</div>
+      <div class="day" onclick="showEvents(14)">14</div>
+      <div class="day" onclick="showEvents(15)">15</div>
+      <div class="day" onclick="showEvents(16)">16</div>
+      <div class="day" onclick="showEvents(17)">17</div>
+      <div class="day" onclick="showEvents(18)">18</div>
+      <div class="day" onclick="showEvents(19)">19</div>
+      <div class="day" onclick="showEvents(20)">20</div>
+      <div class="day" onclick="showEvents(21)">21</div>
+      <div class="day" onclick="showEvents(22)">22</div>
+      <div class="day" onclick="showEvents(23)">23</div>
+      <div class="day" onclick="showEvents(24)">24</div>
+      <div class="day holiday" onclick="showEvents(25)">25</div>
+      <div class="day" onclick="showEvents(26)">26</div>
+      <div class="day" onclick="showEvents(27)">27</div>
+      <div class="day" onclick="showEvents(28)">28</div>
+      <div class="day" onclick="showEvents(29)">29</div>
+      <div class="day" onclick="showEvents(30)">30</div>
+      <div class="day holiday" onclick="showEvents(31)">31</div>
+    </div>
+  </div>
+
+  <!-- Event Sidebar Section -->
+  <div class="event-sidebar">
+    <div class="event-header" id="event-date">Select a day</div>
+    <div class="event-list" id="event-list">
+      <!-- Events will be displayed here based on selection -->
+      <div class="no-events">No events on this day, so take a rest, my love <3</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const events = {
+    1: ["Bonfacio Day"],
+    7: ["National Pearl Harbor Remembrance Day"],
+    24: ["Christmas Eve - Family Gathering"],
+    25: ["Christmas Day - Celebrate with loved ones"],
+    26: ["Chika Day - Mag kiss kiss sakong loloves"],
+    31: ["New Year's Eve - Countdown to 2025"],
+  };
+
+  function showEvents(day) {
+    const eventDate = document.getElementById("event-date");
+    const eventList = document.getElementById("event-list");
+
+    // Set selected day styling
+    document.querySelectorAll(".day").forEach(dayElem => dayElem.classList.remove("selected"));
+    document.querySelectorAll(".day")[day - 1].classList.add("selected");
+
+    // Update the event date title
+    eventDate.innerText = `December ${day}, 2024`;
+
+    // Clear previous events and add new events
+    eventList.innerHTML = "";
+    if (events[day]) {
+      events[day].forEach(event => {
+        const eventElem = document.createElement("div");
+        eventElem.className = "event";
+        eventElem.innerText = event;
+        eventList.appendChild(eventElem);
+      });
+    } else {
+      const noEventElem = document.createElement("div");
+      noEventElem.className = "no-events";
+      noEventElem.innerText = "No events on this day, so take a rest, my love <3";
+      eventList.appendChild(noEventElem);
+    }
+  }
+</script>
+
+</body>
+</html>
